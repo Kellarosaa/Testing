@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Engine</title>
+    <title>Search Engine with Link Redirection</title>
 </head>
 <body>
-    <form action="redirect.html" method="get">
-        <label for="search">Search:</label>
-        <input type="text" id="search" name="search">
+    <form action="https://www.google.com/search" method="get">
+        <input type="text" name="q" placeholder="Search...">
         <button type="submit">Search</button>
     </form>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let query = document.querySelector('input[name="q"]').value;
+            if (query.includes('example.com')) {
+                window.location.href = 'https://www.example.com';
+            } else {
+                window.location.href = 'https://www.google.com/search?q=' + query;
+            }
+        });
+    </script>
 </body>
 </html>
