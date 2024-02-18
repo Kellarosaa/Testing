@@ -4,33 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Search Engine with Link Redirection</title>
+    <title>Search Engine Redirector</title>
 </head>
 <body>
-    <form action="https://www.google.com/search" method="get">
-        <input type="text" name="q" placeholder="Search...">
+    <form id="searchForm" onsubmit="redirectSearch(); return false;">
+        <input type="text" id="searchInput" placeholder="Search...">
         <button type="submit">Search</button>
     </form>
 
     <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            let query = document.querySelector('input[name="q"]').value;
-            let links = {
-                'example': 'https://www.example.com',
-                'tutorial': 'https://www.tutorial.com',
-                'blog': 'https://www.blog.com'
-            };
-            for (const key in links) {
-                if (query.includes(key)) {
-                    window.location.href = links[key];
-                    return;
-                }
+        function redirectSearch() {
+            const searchQuery = document.getElementById('searchInput').value.trim();
+            const validExtensions = ['.app', '.io', '.ai', '.com'];
+
+            if (validExtensions.some(ext => searchQuery.endsWith(ext))) {
+                const url = 'https://' + searchQuery;
+                window.location.href = url;
+            } else {
+                alert('Invalid search query. Please try again.');
             }
-            window.location.href = 'https://www.google.com/search?q=' + query;
-        });
+        }
     </script>
 </body>
-</html>
-
 </html>
