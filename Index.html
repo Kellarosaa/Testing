@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Engine Redirector</title>
+</head>
+<body>
+    <form id="searchForm" onsubmit="redirectUser()">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+
+    <script>
+        function redirectUser() {
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            const domainExtensions = ['.com', '.app', '.io', '.ai'];
+
+            for (let extension of domainExtensions) {
+                if (searchQuery.endsWith(extension)) {
+                    window.location.href = `https://www.${searchQuery}`;
+                    return;
+                }
+            }
+
+            alert('Search query not supported. Please try again.');
+        }
+    </script>
+</body>
+</html>
