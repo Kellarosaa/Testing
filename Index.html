@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Engine with Link Redirection</title>
+    <title>Enhanced Search Engine with Link Redirection</title>
 </head>
 <body>
     <form action="https://www.google.com/search" method="get">
@@ -16,12 +16,21 @@
         document.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault();
             let query = document.querySelector('input[name="q"]').value;
-            if (query.includes('example.com')) {
-                window.location.href = 'https://www.example.com';
-            } else {
-                window.location.href = 'https://www.google.com/search?q=' + query;
+            let links = {
+                'example': 'https://www.example.com',
+                'tutorial': 'https://www.tutorial.com',
+                'blog': 'https://www.blog.com'
+            };
+            for (const key in links) {
+                if (query.includes(key)) {
+                    window.location.href = links[key];
+                    return;
+                }
             }
+            window.location.href = 'https://www.google.com/search?q=' + query;
         });
     </script>
 </body>
+</html>
+
 </html>
