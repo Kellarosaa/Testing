@@ -11,6 +11,7 @@
         <input type="text" id="searchInput" placeholder="Search...">
         <button type="submit">Search</button>
     </form>
+    <p id="feedback"></p>
 
     <script>
         function redirectSearch() {
@@ -21,7 +22,7 @@
                 const url = 'https://' + searchQuery;
                 window.location.href = url;
             } else {
-                alert('Invalid search query. Please try again.');
+                document.getElementById('feedback').innerText = 'Invalid search query. Please try again.';
             }
         }
     </script>
