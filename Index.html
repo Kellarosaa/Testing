@@ -4,50 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Engine Redirector</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        form {
-            margin-top: 20px;
-        }
-        input {
-            padding: 8px;
-            margin-right: 5px;
-        }
-        button {
-            padding: 8px 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>Search Engine</title>
 </head>
 <body>
-    <form id="searchForm" onsubmit="redirectSearch(); return false;">
-        <input type="text" id="searchInput" placeholder="Search...">
-        <button type="submit">Search</button>
-    </form>
-    <p id="feedback"></p>
-
     <script>
-        function redirectSearch() {
-            const searchQuery = document.getElementById('searchInput').value.trim();
-            const validExtensions = ['.app', '.io', '.ai', '.com'];
-
-            if (validExtensions.some(ext => searchQuery.endsWith(ext))) {
-                const url = 'https://' + searchQuery;
-                window.location.href = url;
+        function searchAndRedirect() {
+            let searchQuery = document.getElementById("searchInput").value.trim();
+            let domain = searchQuery.split('.').pop();
+            if (domain === "app" || domain === "io" || domain === "ai" || domain === "com") {
+                window.location.href = "https://" + searchQuery;
             } else {
-                document.getElementById('feedback').innerText = 'Invalid search query. Please try again.';
+                window.location.href = "https://www.google.com/search?q=" + searchQuery;
             }
         }
     </script>
+
+    <input type="text" id="searchInput" placeholder="Enter your search query">
+    <button onclick="searchAndRedirect()">Search</button>
 </body>
 </html>
